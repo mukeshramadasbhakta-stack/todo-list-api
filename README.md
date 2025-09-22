@@ -63,6 +63,10 @@ By default, the API runs with Environment=Development if not set.
 - API key authentication is required.
 - Provide the API key via an HTTP header (e.g., x-api-key). Ensure your client includes this header for all protected endpoints.
 - When using Swagger UI, click “Authorize” and enter the API key.
+- When using Postman, add the API key to the Auth - <img width="536" height="421" alt="image" src="https://github.com/user-attachments/assets/c0b6742a-4808-40c8-9a80-cafaa86f7410" />
+
+
+**NOTE** - You can find the API key in the appsettings.Development.json.
 
 ## API
 
