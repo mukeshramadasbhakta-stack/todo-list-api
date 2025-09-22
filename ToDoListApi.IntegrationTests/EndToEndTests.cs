@@ -46,7 +46,7 @@ public class EndToEndTests
     // Arrange
     var mapper = new Mapper(_config);
     var fixture = new Fixture();
-    fixture.Customize<TodoDto>(a => a.With(t => t.Appointment, DateTime.UtcNow.AddDays(3)));
+    fixture.Customize<TodoDto>(a => a.With(t => t.Appointment, DateTime.Now.AddDays(3)));
     var items = fixture.CreateMany<TodoDto>(5).ToList();
     ITodoService service = new TodoService(_mockLogger.Object, mapper, _todoRepository);
 

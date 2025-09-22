@@ -19,7 +19,7 @@ public class TodServiceTests
   public TodServiceTests()
   {
     var fixture = new Fixture();
-    fixture.Customize<Todo>(a => a.With(t => t.Appointment, DateTime.UtcNow.AddDays(-1)));
+    fixture.Customize<Todo>(a => a.With(t => t.Appointment, DateTime.Now.AddDays(-1)));
     _mockLogger = new Mock<ILogger<TodoService>>();
     _mockMapper = new Mock<IMapper>();
     _mockMapper.Setup(a => a.Map<TodoDto>(It.IsAny<Todo>()))
@@ -61,8 +61,8 @@ public class TodServiceTests
   {
     // Arrange
     var fixture = new Fixture();
-    fixture.Customize<Todo>(a => a.With(t => t.Appointment, DateTime.UtcNow.AddDays(-1)));
-    fixture.Customize<TodoDto>(a => a.With(t => t.Appointment, DateTime.UtcNow.AddDays(-1)));
+    fixture.Customize<Todo>(a => a.With(t => t.Appointment, DateTime.Now.AddDays(-1)));
+    fixture.Customize<TodoDto>(a => a.With(t => t.Appointment, DateTime.Now.AddDays(-1)));
     var model = fixture.Create<Todo>();
     _mockRepository.Setup(a => a.GetAsync(It.IsAny<Guid>(), It.IsAny<CancellationToken>()))
       .ReturnsAsync(model);
@@ -77,7 +77,7 @@ public class TodServiceTests
     result.Should().NotBeNull();
     result.Id.Should().NotBeEmpty();
     result.Title.Should().NotBeNullOrEmpty();
-    result.Appointment.Should().NotBeAfter(DateTime.UtcNow);
+    result.Appointment.Should().NotBeAfter(DateTime.Now);
     _mockLogger.Verify(
       x => x.Log(
         LogLevel.Information,
@@ -126,7 +126,7 @@ public class TodServiceTests
     var fixture = new Fixture();
     var id = Guid.NewGuid();
     fixture.Customize<TodoDto>(a =>
-      a.With(t => t.Appointment, DateTime.UtcNow.AddDays(1))
+      a.With(t => t.Appointment, DateTime.Now.AddDays(1))
         .With(t => t.Id, id)
       );
     var dto = fixture.Create<TodoDto>();
@@ -186,7 +186,7 @@ public class TodServiceTests
     var fixture = new Fixture();
     var id = Guid.NewGuid();
     fixture.Customize<TodoDto>(a =>
-      a.With(t => t.Appointment, DateTime.UtcNow.AddDays(-2))
+      a.With(t => t.Appointment, DateTime.Now.AddDays(-2))
         .With(t => t.Id, id)
     );
     var dto = fixture.Create<TodoDto>();
@@ -221,11 +221,11 @@ public class TodServiceTests
     var fixture = new Fixture();
     var id = Guid.NewGuid();
     fixture.Customize<TodoDto>(a =>
-      a.With(t => t.Appointment, DateTime.UtcNow.AddDays(-1))
+      a.With(t => t.Appointment, DateTime.Now.AddDays(-1))
         .With(t => t.Id, id)
     );
     fixture.Customize<Todo>(a =>
-      a.With(t => t.Appointment, DateTime.UtcNow.AddDays(+2))
+      a.With(t => t.Appointment, DateTime.Now.AddDays(+2))
         .With(t => t.Id, id)
     );
     var model = fixture.Create<Todo>();
@@ -279,7 +279,7 @@ public class TodServiceTests
   {
     // Arrange
     ITodoService service = new TodoService(_mockLogger.Object, _mockMapper.Object, _mockRepository.Object);
-    Todo model = null;
+    Todo? model = null;
     _mockRepository.Setup(a => a.GetAsync(It.IsAny<Guid>(), It.IsAny<CancellationToken>()))
       .ReturnsAsync(model);
 

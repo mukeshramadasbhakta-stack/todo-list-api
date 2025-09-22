@@ -10,13 +10,13 @@ public class TodoRepository(AppDbContext db) : ITodoRepository
     // Return all todos ordered by Created date
     return await db.Todos
       .AsNoTracking()
-      .OrderBy(t => t.Created)
+      .OrderByDescending(t => t.Appointment)
       .ToListAsync(cancellationToken);
   }
 
   public async Task<Todo> GetAsync(Guid id, CancellationToken cancellationToken)
   {
-    // Returns null! when not found; upstream uses ?. semantics
+    // Returns null! when not found
     return await db.Todos
       .AsNoTracking()
       .FirstOrDefaultAsync(t => t.Id == id, cancellationToken)!;
@@ -41,6 +41,7 @@ public class TodoRepository(AppDbContext db) : ITodoRepository
     {
       // Update existing entity fields
       existing.Title = todo.Title;
+      existing.Appointment = todo.Appointment;
       existing.Created = todo.Created;
       existing.Updated = todo.Updated;
       db.Todos.Update(existing);

@@ -42,8 +42,8 @@ public class TodoMapperTests
     model.Id.Should().Be(dto.Id);
     model.Title.Should().Be(dto.Title);
     model.Appointment.Should().Be(dto.Appointment);
-    model.Created.Should().BeBefore(DateTime.UtcNow);
-    model.Updated.Should().BeBefore(DateTime.UtcNow);
+    model.Created.Should().BeBefore(DateTime.Now);
+    model.Updated.Should().BeBefore(DateTime.Now);
   }
 
   [Fact]

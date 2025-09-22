@@ -13,9 +13,15 @@ public class TodoController(ILogger<TodoController> logger, ITodoService todoSer
 {
   private const string LogErrorString = "{ClassName}::{MethodName} exception, correlationId {Id}";
 
+  /// <summary>
+  /// Get all TODO items
+  /// </summary>
+  /// <response code="200">Returns the list of todos.</response>
+  /// <response code="404">Not found.</response>
+  /// <response code="401">Unauthorized.</response>
+  /// <response code="500">Server error.</response>
   [HttpGet("GetAll")]
   [ProducesResponseType(StatusCodes.Status200OK)]
-  [ProducesResponseType(StatusCodes.Status404NotFound)]
   [ProducesResponseType(StatusCodes.Status401Unauthorized)]
   [ProducesResponseType(StatusCodes.Status500InternalServerError)]
   public async Task<IActionResult> GetAll()
@@ -34,6 +40,13 @@ public class TodoController(ILogger<TodoController> logger, ITodoService todoSer
     }
   }
 
+  /// <summary>
+  /// Get a TODO item
+  /// </summary>
+  /// <response code="200">Returns a TODO item.</response>
+  /// <response code="404">Not found.</response>
+  /// <response code="401">Unauthorized.</response>
+  /// <response code="500">Server error.</response>
   [HttpGet]
   [ProducesResponseType(StatusCodes.Status200OK)]
   [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -60,6 +73,12 @@ public class TodoController(ILogger<TodoController> logger, ITodoService todoSer
     }
   }
 
+  /// <summary>
+  /// Upsert a TODO item
+  /// </summary>
+  /// <response code="200">Returns a TODO id.</response>
+  /// <response code="401">Unauthorized.</response>
+  /// <response code="500">Server error.</response>
   [HttpPost]
   [ProducesResponseType(StatusCodes.Status200OK)]
   [ProducesResponseType(StatusCodes.Status401Unauthorized)]
@@ -84,6 +103,12 @@ public class TodoController(ILogger<TodoController> logger, ITodoService todoSer
     }
   }
 
+  /// <summary>
+  /// Delete a TODO item
+  /// </summary>
+  /// <response code="200">Returns nothing.</response>
+  /// <response code="401">Unauthorized.</response>
+  /// <response code="500">Server error.</response>
   [HttpDelete]
   [ProducesResponseType(StatusCodes.Status200OK)]
   [ProducesResponseType(StatusCodes.Status401Unauthorized)]
