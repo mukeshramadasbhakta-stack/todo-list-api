@@ -119,6 +119,7 @@ Notes:
 - To keep DTOs stable, add mappings in AutoMapper profiles.
 - Use the middleware for consistent/structured error handling.
 - Logging can be further enhanced with tools like Seq, Azure Application Insights or AWS CloudWatch.
+- API key authentication can be further refined by using key vaults etc. 
 - Though Automapper has been used in this use-case, I prefer writing my own mapping code for performance.
 - AutoFixtures can be enhanced with Fake/Bogus packages.
 - I would consider enhancing the code-base with the MediatR pattern.
